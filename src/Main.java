@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String mainMenuText = """
+        String mainMenu = """
                 Головне Меню (для переходу між пунктами вводьте їх у строку)
                 1. Нова гра
                 2. Налаштування
@@ -11,20 +11,20 @@ public class Main {
                 Ваш вибір:
                 """;
 
-        String settingsText = """
+        String set = """
                 Налаштування:
                 Введіть бажаний розмір поля (3, 5, 7 або 9):
                 """;
         int height = 7;
         while (true) {
-            System.out.print(mainMenuText);
+            System.out.print(mainMenu);
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
                     game(sc, height);
                     break;
                 case "2":
-                    height = settings(sc, settingsText);
+                    height = settings(sc, set);
                     break;
                 case "0":
                     System.out.println("До зустрічі!");
@@ -138,16 +138,16 @@ public class Main {
                 }
                 turn = (turn == turn1) ? turn2 : turn1;
             }
-            boolean validInput = false;
-            while (!validInput) {
+            boolean valid = false;
+            while (!valid) {
                 System.out.println("Натисніть Enter для виходу в меню або введіть 1 для рестарту:");
                 String choice = sc.nextLine();
                 if (choice.length() == 1 && choice.charAt(0) == '1') {
                     start = true;
-                    validInput = true;
+                    valid = true;
                 } else if (choice.isEmpty()) {
                     start = false;
-                    validInput = true;
+                    valid = true;
                 } else {
                     System.out.println("Некоректний ввід! Введіть 1 або натисніть Enter.");
                 }
@@ -185,8 +185,8 @@ public class Main {
         }
         return false;
     }
-    public static int settings(Scanner sc, String settingsText) {
-        System.out.print(settingsText);
+    public static int settings(Scanner sc, String set) {
+        System.out.print(set);
         while (true) {
             if (sc.hasNextInt()) {
                 int newSize = sc.nextInt();
